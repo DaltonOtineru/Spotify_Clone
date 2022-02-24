@@ -1,15 +1,16 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
-import Dropdown from '../Dropdown/Dropdown';
-import { Credentials } from '../../Spotify/Credentials';
+
 import axios from 'axios';
 
 const App = () => {
-  const spotify = Credentials();
+  const clientId = process.env.REACT_APP_CLIENT_ID;
+  const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
 
   const [token, setToken] = useState('');
-  const [term, setSearchTerm] = useState('');
+  const [term, setSearchTerm] = useState('drake');
+  const [trackData, setTrackData] = useState([]);
 
   const handleSearch = () => {
     setSearchTerm(term);
@@ -19,21 +20,28 @@ const App = () => {
     axios('https://accounts.spotify.com/api/token', {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization:
-          'Basic ' + btoa(spotify.ClientId + ':' + spotify.ClientSecret),
+        Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
       },
       data: 'grant_type=client_credentials',
       method: 'POST',
     }).then((tokenResponse) => {
-      // console.log(tokenResponse.data.access_token);
       setToken(tokenResponse.data.access_token);
+      console.log(tokenResponse.data.access_token);
+      // console.log(token);
 
-      axios('https://api.spotify.com/v1/search', {
+      axios('https://api.spotify.com/v1/search?type=track&limit=15', {
         method: 'GET',
-        headers: { Authorization: 'Bearer ' + tokenResponse.data.access_token },
+        headers: {
+          Authorization: 'Bearer ' + token,
+          Accept: 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        params: {
+          q: term,
+        },
       }).then((tracksResponse) => {
-        setSearchTerm(tracksResponse.data.categories.items);
-        console.log(tracksResponse.data.categories.items);
+        // setSearchTerm(tracksResponse.data.categories.items);
+        console.log(tracksResponse.data.tracks.items);
       });
     });
   }, []);

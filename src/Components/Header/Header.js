@@ -24,7 +24,7 @@ const Header = ({ term, handleSearch, setSearchTerm }) => {
       <button
         type="button"
         className="search--btn"
-        onClick={() => handleSearch()}
+        // onClick={() => handleSearch()}
       >
         Search
       </button>
