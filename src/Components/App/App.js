@@ -27,12 +27,12 @@ const App = () => {
     }).then((tokenResponse) => {
       setToken(tokenResponse.data.access_token);
       console.log(tokenResponse.data.access_token);
-      // console.log(token);
+      console.log(token);
 
       axios('https://api.spotify.com/v1/search?type=track&limit=15', {
         method: 'GET',
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + tokenResponse.data.access_token,
           Accept: 'application/json',
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -40,7 +40,6 @@ const App = () => {
           q: term,
         },
       }).then((tracksResponse) => {
-        // setSearchTerm(tracksResponse.data.categories.items);
         console.log(tracksResponse.data.tracks.items);
       });
     });
