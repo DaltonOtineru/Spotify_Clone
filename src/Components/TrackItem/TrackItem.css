@@ -1,0 +1,44 @@
+.track--display {
+  margin-top: 3rem;
+  padding-bottom: 3rem;
+}
+.track--item--anchor {
+  text-decoration: none;
+  margin: 1rem;
+  padding-top: 1rem;
+  background: #181818;
+  border-radius: 3px;
+}
+
+.track--img {
+  display: flex;
+  justify-content: center;
+}
+.track--item img {
+  width: 90%;
+  height: auto;
+  border-radius: 3px;
+  margin: 0 auto;
+}
+.track--info {
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin: 0 auto;
+}
+.track--title {
+  color: #ffffff;
+  margin-bottom: 0;
+}
+.track--title:hover {
+  text-decoration: underline;
+  text-decoration-color: #1cd760;
+}
+.artist {
+  color: #a7a7a7;
+  text-decoration: none;
+}
+.artist:hover {
+  text-decoration: none;
+}

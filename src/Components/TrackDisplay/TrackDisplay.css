@@ -1,0 +1,12 @@
+.track--display {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.track--display--inner {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  max-width: 1340px;
+  justify-content: center;
+}

@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
-
+import TrackDisplay from '../TrackDisplay/TrackDisplay';
 import axios from 'axios';
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
       console.log(tokenResponse.data.access_token);
       console.log(token);
 
-      axios('https://api.spotify.com/v1/search?type=track&limit=15', {
+      axios('https://api.spotify.com/v1/search?type=track&limit=24', {
         method: 'GET',
         headers: {
           Authorization: 'Bearer ' + tokenResponse.data.access_token,
@@ -40,7 +40,9 @@ const App = () => {
           q: term,
         },
       }).then((tracksResponse) => {
-        console.log(tracksResponse.data.tracks.items);
+        // console.log(tracksResponse.data.tracks.items);
+        setTrackData(tracksResponse.data.tracks.items);
+        console.log(trackData);
       });
     });
   }, []);
@@ -52,6 +54,7 @@ const App = () => {
         handleSearch={handleSearch}
         setSearchTerm={setSearchTerm}
       />
+      <TrackDisplay trackData={trackData} />
     </div>
   );
 };
