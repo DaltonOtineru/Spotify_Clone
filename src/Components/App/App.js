@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../Header/Header';
 import TrackDisplay from '../TrackDisplay/TrackDisplay';
 import axios from 'axios';
@@ -9,11 +9,22 @@ const App = () => {
   const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
 
   const [token, setToken] = useState('');
-  const [term, setSearchTerm] = useState('drake');
+  const [apiFetchTerm, setApiFetchTerm] = useState('drake');
+  const [searchInputTerm, setSearchInputTerm] = useState('');
   const [trackData, setTrackData] = useState([]);
 
-  const handleSearch = () => {
-    setSearchTerm(term);
+  const fetchTermRef = useRef(searchInputTerm);
+  fetchTermRef.current = searchInputTerm;
+
+  const onInputChange = (e) => {
+    setSearchInputTerm(e.target.value);
+    console.log(searchInputTerm);
+  };
+
+  const handleSearch = (e) => {
+    if (e.which === 13) {
+      setSearchInputTerm(e.target.value);
+    }
   };
 
   useEffect(() => {
@@ -37,7 +48,7 @@ const App = () => {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         params: {
-          q: term,
+          q: apiFetchTerm,
         },
       }).then((tracksResponse) => {
         // console.log(tracksResponse.data.tracks.items);
@@ -45,14 +56,26 @@ const App = () => {
         console.log(trackData);
       });
     });
-  }, []);
+  }, [apiFetchTerm]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setApiFetchTerm(searchInputTerm);
+    }, 2000);
+    return () => {
+      setApiFetchTerm(searchInputTerm);
+      console.log(apiFetchTerm);
+    };
+  }, [searchInputTerm]);
 
   return (
     <div className="app">
       <Header
-        term={term}
+        searchInputTerm={searchInputTerm}
         handleSearch={handleSearch}
-        setSearchTerm={setSearchTerm}
+        apiFetchTerm={apiFetchTerm}
+        onInputChange={onInputChange}
+        // setSearchTerm={setSearchTerm}
       />
       <TrackDisplay trackData={trackData} />
     </div>

@@ -5,11 +5,16 @@ import { InputAdornment } from '@mui/material';
 import { TextField } from '@mui/material';
 import { FiSearch } from 'react-icons/fi';
 
-const Header = ({ term, handleSearch, setSearchTerm }) => {
-  const onInputChange = (e) => {
-    setSearchTerm(e.target.value);
-    console.log('foo');
-  };
+const Header = ({
+  searchInputTerm,
+  onInputChange,
+  handleSearch,
+  setSearchInputTerm,
+}) => {
+  //   const onInputChange = (e) => {
+  //     setSearchInputTerm(e.target.value);
+  //     console.log(searchInputTerm);
+  //   };
 
   return (
     <div className="header">
@@ -21,8 +26,9 @@ const Header = ({ term, handleSearch, setSearchTerm }) => {
           <TextField
             type="text"
             className="search--input"
-            value={term}
-            onChange={onInputChange}
+            value={searchInputTerm}
+            onChange={(e) => onInputChange(e)}
+            onKeyPress={(e) => handleSearch(e)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -34,6 +40,7 @@ const Header = ({ term, handleSearch, setSearchTerm }) => {
           <button
             type="button"
             className="search--btn"
+            onClick={(e) => handleSearch(e)}
             // onClick={() => handleSearch()}
           >
             Search
