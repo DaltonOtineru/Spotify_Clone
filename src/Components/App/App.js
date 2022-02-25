@@ -8,7 +8,7 @@ const App = () => {
   const clientId = process.env.REACT_APP_CLIENT_ID;
   const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
 
-  const [token, setToken] = useState('');
+  // const [token, setToken] = useState('');
   const [apiFetchTerm, setApiFetchTerm] = useState('drake');
   const [searchInputTerm, setSearchInputTerm] = useState('');
   const [trackData, setTrackData] = useState([]);
@@ -18,12 +18,11 @@ const App = () => {
 
   const onInputChange = (e) => {
     setSearchInputTerm(e.target.value);
-    console.log(searchInputTerm);
   };
 
   const handleSearch = (e) => {
     if (e.which === 13) {
-      setSearchInputTerm(e.target.value);
+      setApiFetchTerm(e.target.value);
     }
   };
 
@@ -36,11 +35,9 @@ const App = () => {
       data: 'grant_type=client_credentials',
       method: 'POST',
     }).then((tokenResponse) => {
-      setToken(tokenResponse.data.access_token);
-      console.log(tokenResponse.data.access_token);
-      console.log(token);
+      // setToken(tokenResponse.data.access_token);
 
-      axios('https://api.spotify.com/v1/search?type=track&limit=24', {
+      axios('https://api.spotify.com/v1/search?type=track&limit=40', {
         method: 'GET',
         headers: {
           Authorization: 'Bearer ' + tokenResponse.data.access_token,
@@ -51,22 +48,14 @@ const App = () => {
           q: apiFetchTerm,
         },
       }).then((tracksResponse) => {
-        // console.log(tracksResponse.data.tracks.items);
         setTrackData(tracksResponse.data.tracks.items);
-        console.log(trackData);
       });
     });
   }, [apiFetchTerm]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setApiFetchTerm(searchInputTerm);
-    }, 2000);
-    return () => {
-      setApiFetchTerm(searchInputTerm);
-      console.log(apiFetchTerm);
-    };
-  }, [searchInputTerm]);
+    setApiFetchTerm(searchInputTerm);
+  }, [apiFetchTerm]);
 
   return (
     <div className="app">
@@ -75,7 +64,6 @@ const App = () => {
         handleSearch={handleSearch}
         apiFetchTerm={apiFetchTerm}
         onInputChange={onInputChange}
-        // setSearchTerm={setSearchTerm}
       />
       <TrackDisplay trackData={trackData} />
     </div>

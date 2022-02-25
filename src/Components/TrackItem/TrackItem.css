@@ -8,6 +8,10 @@
   padding-top: 1rem;
   background: #181818;
   border-radius: 5px;
+  transition: background-color 0.4s ease;
+}
+.track--item--anchor:hover {
+  background-color: #242424;
 }
 
 .track--img {

@@ -22,6 +22,9 @@
 .title {
   margin-right: 1rem;
 }
+.title a {
+  text-decoration: none;
+}
 .title h1 {
   color: #ffffff;
   font-weight: 600 !important;

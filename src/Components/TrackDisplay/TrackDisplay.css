@@ -6,7 +6,7 @@
 .track--display--inner {
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
-  max-width: 1450px;
+  width: 90%;
+  max-width: 1550px;
   justify-content: center;
 }

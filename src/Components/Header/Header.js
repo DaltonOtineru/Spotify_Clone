@@ -20,7 +20,9 @@ const Header = ({
     <div className="header">
       <div className="header--inner">
         <div className="title">
-          <h1> Spotify Music Clone</h1>
+          <a href="#">
+            <h1> Spotify Music Clone</h1>
+          </a>
         </div>
         <div className="header--search">
           <TextField
@@ -29,6 +31,8 @@ const Header = ({
             value={searchInputTerm}
             onChange={(e) => onInputChange(e)}
             onKeyPress={(e) => handleSearch(e)}
+            autoComplete="off"
+            placeholder="Search..."
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

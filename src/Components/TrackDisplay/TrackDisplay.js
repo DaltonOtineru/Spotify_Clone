@@ -13,7 +13,7 @@ const TrackDisplay = ({ trackData }) => {
           <TrackItem
             name={track.name}
             images={track.album.images[1].url}
-            href={track.href}
+            href={track.external_urls.spotify}
             album={track.album.name}
             artists={track.album.artists[0].name}
             key={track.id}
