@@ -1,21 +1,10 @@
 import './Header.css';
 import React from 'react';
-import { Input } from '@mui/material';
 import { InputAdornment } from '@mui/material';
 import { TextField } from '@mui/material';
 import { FiSearch } from 'react-icons/fi';
 
-const Header = ({
-  searchInputTerm,
-  onInputChange,
-  handleSearch,
-  setSearchInputTerm,
-}) => {
-  //   const onInputChange = (e) => {
-  //     setSearchInputTerm(e.target.value);
-  //     console.log(searchInputTerm);
-  //   };
-
+const Header = ({ searchInputTerm, onInputChange, handleSearch }) => {
   return (
     <div className="header">
       <div className="header--inner">
@@ -45,7 +34,6 @@ const Header = ({
             type="button"
             className="search--btn"
             onClick={(e) => handleSearch(e)}
-            // onClick={() => handleSearch()}
           >
             Search
           </button>
@@ -56,7 +44,3 @@ const Header = ({
 };
 
 export default Header;
-
-{
-  /* <p className="label">Enter a Search Term</p> */
-}

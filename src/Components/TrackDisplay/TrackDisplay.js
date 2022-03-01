@@ -1,11 +1,8 @@
 import React from 'react';
 import TrackItem from '../TrackItem/TrackItem';
 import './TrackDisplay.css';
+
 const TrackDisplay = ({ trackData }) => {
-  console.log(trackData);
-
-  const imageMap = () => {};
-
   return (
     <div className="track--display">
       <div className="track--display--inner">
