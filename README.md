@@ -11,6 +11,8 @@ React JS web application that pulls artist and track data from the Spotify web A
 - Axios
 - CSS
 
+![Spotify API Application](/src/images/readme_spotify.png)
+
 ## Quick Start
 
 First, go to [https://developer.spotify.com/dashboard/login](https://developer.spotify.com/dashboard/login) and create your spotify developer account, in order to retrieve you Client Id & Client Secret.

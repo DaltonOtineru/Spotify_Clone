@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import TrackDisplay from '../TrackDisplay/TrackDisplay';
 import axios from 'axios';
-import spotifyApi from '../../Spotify/spotifyApi';
 
 const App = () => {
   const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -32,7 +31,7 @@ const App = () => {
       data: 'grant_type=client_credentials',
       method: 'POST',
     }).then((tokenResponse) => {
-      axios('https://api.spotify.com/v1/search?type=track&limit=40', {
+      axios('https://api.spotify.com/v1/search?type=track&limit=20', {
         method: 'GET',
         headers: {
           Authorization: 'Bearer ' + tokenResponse.data.access_token,
