@@ -48,7 +48,7 @@
   font-weight: 600;
 }
 
-/* mui-* is input field material ui id */
+/* mui-* is input field material ui className */
 .MuiOutlinedInput-root {
   height: 40px;
   width: 360px;
